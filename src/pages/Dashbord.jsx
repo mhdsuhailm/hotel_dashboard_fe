@@ -144,8 +144,11 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchStats = async () => {
       // const res = await axios.get("http://localhost:5000/api/dashboard/stats");
+      // const res = await axios.get(
+      //   `http://localhost:5000/api/dashboard/stats?range=${range}`
+      // )
       const res = await axios.get(
-        `http://localhost:5000/api/dashboard/stats?range=${range}`
+        `${import.meta.env.VITE_API_URL}/api/dashboard/stats?range=${range}`
       )
       setStats(res.data)
     }
