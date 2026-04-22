@@ -7,6 +7,7 @@ import {
   Users,
   BarChart,
   Star,
+  ChefHat,
   UserCheck,
   Info,
   Settings,
@@ -15,6 +16,7 @@ import {
 const menuItems = [
   { name: "Dashboard", icon: Home, path: "/" },
   { name: "Orders", icon: ShoppingCart, path: "/orders" },
+  { name: "Kitchen", icon: ChefHat, path: "/kitchen" },
   { name: "Menu Management", icon: Menu, path: "/menu" },
   { name: "Customer", icon: Users, path: "/customer" },
   { name: "Sales & Analytics", icon: BarChart, path: "/analytics" },

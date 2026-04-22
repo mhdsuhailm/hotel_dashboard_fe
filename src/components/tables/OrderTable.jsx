@@ -58,8 +58,8 @@ const OrderTable = () => {
 
   useEffect(() => {
     axios
-      // .get("http://localhost:5000/api/admin/orders")
-      .get(`${import.meta.env.VITE_API_URL}/api/admin/orders`)
+      // .get("http://localhost:5000/api/orders/orders")
+      .get(`${import.meta.env.VITE_API_URL}/api/orders/orders`)
       .then((res) => setOrders(res.data))
       .catch((err) => console.log(err));
   }, []);
