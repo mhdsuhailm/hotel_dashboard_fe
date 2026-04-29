@@ -108,7 +108,7 @@ const OrderTable = () => {
                 className="border-b border-[#1E1919] hover:bg-[#1E1919] transition"
               >
                 {/* ORDER ID */}
-                <td className="py-3">{order.order_id}</td>
+                <td className="py-3">{order.id}</td>
 
                 {/* NAME */}
                 <td className="py-3">{order.name}</td>

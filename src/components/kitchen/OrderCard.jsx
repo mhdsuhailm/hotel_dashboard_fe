@@ -43,8 +43,8 @@ const OrderCard = ({ order, onStatusChange }) => {
       <div className="space-y-2 mb-3">
         {order.items?.map((item, i) => (
           <div key={i} className="flex justify-between text-sm">
-            <span className="text-gray-300">{item.name}</span>
-            <span className="text-gray-400">x{item.qty}</span>
+            <span className="text-white">{item.name}</span>
+            <span className="text-white">x{item.qty}</span>
           </div>
         ))}
       </div>

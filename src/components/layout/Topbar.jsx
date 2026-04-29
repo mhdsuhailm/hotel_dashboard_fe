@@ -9,9 +9,16 @@ const Topbar = () => {
       <div>
         <p className="text-xs text-gray-400">Hello,</p>
         <h2 className="text-sm font-semibold text-white">
-          Oliver Bennett. Welcome back to FeAST on the rise Admin!
+          Oliver Bennett. Welcome back to FeAST on the Admin!
         </h2>
       </div>
+{/* <div>
+  <p className="text-xs text-gray-400">Hello,</p>
+  <h2 className="text-sm font-semibold text-white">
+    Oliver Bennett. Welcome back to Fe
+    <span className="text-[#e30613] inline align-baseline">AST</span> on the Admin!
+  </h2>
+</div> */}
 
       {/* RIGHT */}
       <div className="flex items-center gap-4">

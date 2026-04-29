@@ -30,7 +30,7 @@ const Sidebar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   return (
-    <div className="w-64 h-full flex flex-col bg-[#0D0B0A] text-white px-4 py-5">
+    <div className="w-64 min-w-[16rem] h-full flex flex-col bg-[#0D0B0A] text-white px-4 py-5">
 
       {/* LOGO */}
       <div className="flex items-center gap-2.5 mb-3">
