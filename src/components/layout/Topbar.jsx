@@ -9,7 +9,7 @@ const Topbar = () => {
       <div>
         <p className="text-xs text-gray-400">Hello,</p>
         <h2 className="text-sm font-semibold text-white">
-          Oliver Bennett. Welcome back to FeAST on the Admin!
+          Oliver Bennett. Welcome back to FeAST!
         </h2>
       </div>
 {/* <div>

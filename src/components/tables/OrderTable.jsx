@@ -52,15 +52,18 @@
 
 import { useEffect, useState } from "react";
 import axios from "axios";
-
+import OrderDetailsModal from "../menu/OrderDetailsModal";
 const OrderTable = () => {
   const [orders, setOrders] = useState([]);
-
+const [selectedOrder, setSelectedOrder] = useState(null);
   useEffect(() => {
     axios
-      // .get("http://localhost:5000/api/orders/orders")
-      .get(`${import.meta.env.VITE_API_URL}/api/orders/orders`)
-      .then((res) => setOrders(res.data))
+      .get("http://localhost:5000/api/orders/orders")
+      // .get(`${import.meta.env.VITE_API_URL}/api/orders/orders`)
+      .then((res) => {
+        console.log(res.data);
+        setOrders(res.data);
+      })
       .catch((err) => console.log(err));
   }, []);
 
@@ -68,8 +71,14 @@ const OrderTable = () => {
   const getStatusStyle = (status) => {
     if (status === "completed")
       return "bg-green-500/20 text-green-400";
-    if (status === "pending")
+    if (status === "ready")
+      return "bg-green-500/20 text-green-400";
+    if (status === "paid")
+      return "bg-green-500/20 text-green-400";
+    if (status === "confirmed")
       return "bg-blue-500/20 text-blue-400";
+    if (status === "pending")
+      return "bg-red-500/20 text-red-400";
     if (status === "cancelled")
       return "bg-red-500/20 text-red-400";
     return "bg-gray-500/20 text-gray-400";
@@ -95,6 +104,7 @@ const OrderTable = () => {
               <th className="pb-3 text-left">Phone</th>
               <th className="pb-3 text-left">Address</th>
               <th className="pb-3 text-left">Status</th>
+              <th className="pb-3 text-left">Payment Status</th>
               <th className="pb-3 text-left">Total</th>
               <th className="pb-3 text-left">Delivery Contact</th>
             </tr>
@@ -104,11 +114,17 @@ const OrderTable = () => {
           <tbody>
             {orders.map((order) => (
               <tr
-                key={order.order_id}
+                key={order.id}
                 className="border-b border-[#1E1919] hover:bg-[#1E1919] transition"
               >
                 {/* ORDER ID */}
-                <td className="py-3">{order.id}</td>
+                {/* <td className="py-3">ORD-{order.order_number}</td> */}
+                <td
+                  className="py-3 text-blue-400 cursor-pointer hover:underline"
+                  onClick={() => setSelectedOrder(order)}
+                >
+                  ORD-{order.order_number}
+                </td>
 
                 {/* NAME */}
                 <td className="py-3">{order.name}</td>
@@ -131,6 +147,15 @@ const OrderTable = () => {
                     {order.status}
                   </span>
                 </td>
+                <td>
+                  <span
+                    className={`px-2 py-1 rounded text-xs ${getStatusStyle(
+                      order.payment_status
+                    )}`}
+                  >
+                    {order.payment_status}
+                  </span>
+                </td>
 
                 {/* TOTAL */}
                 <td className="text-orange-400 font-semibold">
@@ -144,6 +169,12 @@ const OrderTable = () => {
           </tbody>
 
         </table>
+        {selectedOrder && (
+          <OrderDetailsModal
+            order={selectedOrder}
+            onClose={() => setSelectedOrder(null)}
+          />
+        )}
       </div>
     </div>
   );

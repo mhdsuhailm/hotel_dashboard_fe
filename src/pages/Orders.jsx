@@ -1,23 +1,21 @@
-import React from 'react';
 import Sidebar from "../components/layout/Sidebar";
-
+import Topbar from "../components/layout/Topbar";
+import OrderTable from "../components/tables/OrderTable";
 const Orders = () => {
   return (
     <div className="h-screen flex overflow-hidden">
+      
       <Sidebar />
 
-      <div className="flex-1 p-6 bg-gray-100 min-h-screen">
-        <h1 className="text-2xl font-bold mb-6">Dashboard</h1>
+      <div className="flex-1 flex flex-col min-w-0">
+        <Topbar />
 
-        {/* <DashboardCards />
-        <OrderTable /> */}
+        <div className="flex-1 bg-[#0D0B0A] p-6 overflow-y-auto">
+          <OrderTable />
+        </div>
       </div>
-       <div>
-      <h1>Orders</h1>
-      <p>This is a simple orders page.</p>
+
     </div>
-    </div>
-   
   );
 };
 
