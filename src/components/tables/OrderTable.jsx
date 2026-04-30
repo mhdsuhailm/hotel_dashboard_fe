@@ -56,6 +56,14 @@ import OrderDetailsModal from "../menu/OrderDetailsModal";
 const OrderTable = () => {
   const [orders, setOrders] = useState([]);
 const [selectedOrder, setSelectedOrder] = useState(null);
+const fetchOrders = () => {
+  axios.get("http://localhost:5000/api/orders/orders")
+    .then(res => setOrders(res.data));
+};
+
+useEffect(() => {
+  fetchOrders();
+}, []);
   useEffect(() => {
     axios
       .get("http://localhost:5000/api/orders/orders")
@@ -173,6 +181,7 @@ const [selectedOrder, setSelectedOrder] = useState(null);
           <OrderDetailsModal
             order={selectedOrder}
             onClose={() => setSelectedOrder(null)}
+            refreshOrders={fetchOrders}
           />
         )}
       </div>
