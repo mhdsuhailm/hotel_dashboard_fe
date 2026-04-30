@@ -57,7 +57,8 @@ const OrderTable = () => {
   const [orders, setOrders] = useState([]);
 const [selectedOrder, setSelectedOrder] = useState(null);
 const fetchOrders = () => {
-  axios.get("http://localhost:5000/api/orders/orders")
+  // axios.get("http://localhost:5000/api/orders/orders")
+  axios.get(`${import.meta.env.VITE_API_URL}/api/orders/orders`)
     .then(res => setOrders(res.data));
 };
 
@@ -66,8 +67,8 @@ useEffect(() => {
 }, []);
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/orders/orders")
-      // .get(`${import.meta.env.VITE_API_URL}/api/orders/orders`)
+      // .get("http://localhost:5000/api/orders/orders")
+      .get(`${import.meta.env.VITE_API_URL}/api/orders/orders`)
       .then((res) => {
         console.log(res.data);
         setOrders(res.data);

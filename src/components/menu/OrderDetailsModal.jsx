@@ -53,7 +53,8 @@ const OrderDetailsModal = ({ order, onClose, refreshOrders }) => {
 
   const updateStatus = async (newStatus) => {
     try {
-      await axios.put("http://localhost:5000/api/orders/update-status", {
+      // await axios.put("http://localhost:5000/api/orders/update-status", {
+      await axios.put(`${import.meta.env.VITE_API_URL}/api/orders/update-status`, {
         orderId: order.id,
         newStatus,
       });
