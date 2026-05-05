@@ -11,7 +11,7 @@ const Users = () => {
       <div className="flex-1 flex flex-col min-w-0">
         <Topbar />
 
-        <div className="flex-1 bg-[#0D0B0A] p-6 overflow-y-auto">
+        <div className="flex-1 bg-[#0D0B0A] p-6 overflow-hidden min-w-0 min-h-0">
           <UserTable />
         </div>
       </div>

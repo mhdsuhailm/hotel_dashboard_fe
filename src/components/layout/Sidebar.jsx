@@ -30,7 +30,7 @@ const Sidebar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   return (
-    <div className="w-64 min-w-[16rem] h-full flex flex-col bg-[#0D0B0A] text-white px-4 py-5">
+    <div className="w-64 min-w-[16rem] h-full flex flex-col bg-[#0D0B0A] text-white px-4 py-5 relative z-[999]">
 
       {/* LOGO */}
       <div className="flex items-center gap-2.5 mb-3">
@@ -81,7 +81,7 @@ const Sidebar = () => {
         <div className="relative rounded-3xl p-5 text-center overflow-hidden bg-gradient-to-b from-[#FF7A18] to-[#FFB347]">
 
           {/* Glow Effect */}
-          <div className="absolute bottom-0 left-0 w-full h-24 bg-white/20 blur-2xl" />
+          {/* <div className="absolute bottom-0 left-0 w-full h-24 bg-white/20 blur-2xl" /> */}
 
           {/* Image */}
           <div className="mb-4 text-4xl">📋</div>
@@ -90,7 +90,11 @@ const Sidebar = () => {
             Organize your menus <br /> through button below
           </p>
 
-          <button className="bg-white text-black px-4 py-2 rounded-full text-sm font-semibold">
+          <button
+          onClick={() =>{
+            console.log("sidebar clicked");
+            navigate("/add-menu")}}
+          className="bg-white text-black px-4 py-2 rounded-full text-sm font-semibold pointer-events-auto">
             + Add Menus
           </button>
         </div>

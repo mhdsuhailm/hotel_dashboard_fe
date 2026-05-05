@@ -124,7 +124,35 @@ const UserModal = ({ user, onClose }) => {
             <p className="text-gray-400">No addresses available</p>
           )}
         </div>
+{/* ORDERS */}
+<div className="bg-[#1E1919] p-4 rounded mb-4 text-sm">
+  <h3 className="font-semibold mb-3">Orders</h3>
 
+  {user.orders && user.orders.length > 0 ? (
+    user.orders.map((order, index) => (
+      <div
+        key={order.id}
+        className="border-b border-[#2A2A2A] py-2 last:border-none flex justify-between"
+      >
+        <div>
+          <p className="font-medium">ORD-{order.order_number}</p>
+          <p className="text-xs text-gray-400">
+            {new Date(order.created_at).toLocaleString()}
+          </p>
+        </div>
+
+        <div className="text-right">
+          <p className="text-orange-400 font-semibold">
+            ₹{order.total_amount}
+          </p>
+          <p className="text-xs capitalize">{order.status}</p>
+        </div>
+      </div>
+    ))
+  ) : (
+    <p className="text-gray-400">No orders found</p>
+  )}
+</div>
       </div>
     </div>
   );

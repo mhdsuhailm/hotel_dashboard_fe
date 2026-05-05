@@ -1,67 +1,42 @@
-// import { useEffect,useState } from "react";
-// import axios from 'axios';
-// const OrderTable = () => {
-
-//   const[orders, setOrders] = useState([]);
-//   useEffect (() =>{
-//     axios
-//     .get("http://localhost:5000/api/admin/orders")
-//     .then((res) => {
-//       console.log(res.data);
-//       setOrders(res.data);
-      
-//     })
-//     .catch((err) => console.log(err));
-//   },[])
-//   return (
-//     <div className="bg-white p-4 rounded-xl shadow">
-//       <h2 className="text-lg font-bold mb-4">Orders</h2>
-
-//       <table className="w-full text-left">
-//         <thead>
-//           <tr className="border-b">
-//             <th>Order ID</th>
-//             <th>Name</th>
-//             <th>Phone Number</th>
-//             <th>Address</th>
-//             <th>Status</th>
-//             <th>Total</th>
-//             <th>Delivery Contact</th>
-//           </tr>
-//         </thead>
-
-//         <tbody>
-//           {orders.map((order) => (
-//             <tr key={order.id} className="p-4">
-//               <td>{order.order_id}</td>
-//               <td>{order.name}</td>
-//               <td>{order.phone_number}</td>
-//               <td>{order.address || "N/A"}</td>
-//               <td className="text-yellow-500">{order.status}</td>
-//               <td>{order.total_amount}</td>
-//               <td>{order.delivery_contact}</td>
-//             </tr>
-//           ))}
-//         </tbody>
-//       </table>
-//     </div>
-//   );
-// };
-
-// export default OrderTable;
-
 import { useEffect, useState } from "react";
 import axios from "axios";
 import OrderDetailsModal from "../menu/OrderDetailsModal";
 const OrderTable = () => {
   const [orders, setOrders] = useState([]);
 const [selectedOrder, setSelectedOrder] = useState(null);
-const fetchOrders = () => {
-  // axios.get("http://localhost:5000/api/orders/orders")
-  axios.get(`${import.meta.env.VITE_API_URL}/api/orders/orders`)
-    .then(res => setOrders(res.data));
-};
+const handleStatusChange = async (orderId, newStatus) => {
+  try {
+    console.log("FUNCTION CALLED", orderId, newStatus);
 
+    // await axios.put("http://localhost:5000/api/orders/status", {
+    await axios.put(`${import.meta.env.VITE_API_URL}/api/orders/status`, {
+      orderId,
+      newStatus,
+    });
+
+    console.log("AFTER API CALL");
+
+    fetchOrders(); // refresh data
+  } catch (err) {
+    console.log("ERROR:", err.response?.data || err.message);
+  }
+};
+const fetchOrders = async () => {
+  try {
+    // const res = await axios.get("http://localhost:5000/api/orders/orders");
+  const res = axios.get(`${import.meta.env.VITE_API_URL}/api/orders/orders`);
+
+    console.log("FRESH DATA:", res.data); // 🔥 DEBUG
+
+    setOrders([...res.data]); 
+    if (selectedOrder) {
+      const updated = res.data.find(o => o.id === selectedOrder.id);
+      setSelectedOrder(updated);
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
 useEffect(() => {
   fetchOrders();
 }, []);
@@ -71,7 +46,8 @@ useEffect(() => {
       .get(`${import.meta.env.VITE_API_URL}/api/orders/orders`)
       .then((res) => {
         console.log(res.data);
-        setOrders(res.data);
+        // setOrders(res.data);
+        setOrders([...res.data]); // 🔥 IMPORTANT (new reference)
       })
       .catch((err) => console.log(err));
   }, []);
@@ -94,19 +70,18 @@ useEffect(() => {
   };
 
   return (
-    <div className="bg-[#161212] border border-[#241E1E] rounded-xl p-4">
-      
+    <div className="h-full flex flex-col bg-[#161212] border border-[#241E1E] rounded-xl p-4 overflow-hidden">      
       {/* TITLE */}
       <h2 className="text-white text-sm mb-4">
         Recent Orders
       </h2>
 
       {/* TABLE */}
-      <div className="overflow-x-auto">
+      <div className="flex-1 overflow-auto">
         <table className="w-full text-sm text-left text-gray-300">
           
           {/* HEADER */}
-          <thead className="text-xs text-gray-400 border-b border-[#241E1E]">
+          <thead className='sticky top-0 bg-[#161212] z-10 text-gray-400 border-b border-[#241E1E]'>
             <tr>
               <th className="pb-3 text-left">Order ID</th>
               <th className="pb-3 text-left">Name</th>
@@ -183,6 +158,7 @@ useEffect(() => {
             order={selectedOrder}
             onClose={() => setSelectedOrder(null)}
             refreshOrders={fetchOrders}
+            onStatusChange={handleStatusChange}   // 🔥 ADD THIS
           />
         )}
       </div>

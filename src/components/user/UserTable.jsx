@@ -29,7 +29,7 @@ const UserTable = () => {
   };
 
   return (
-    <div className="bg-[#161212] border border-[#241E1E] rounded-xl p-4">
+    <div className="h-full flex flex-col bg-[#161212] border border-[#241E1E] rounded-xl p-4 overflow-hidden">
       
       {/* TITLE */}
       <h2 className="text-white text-sm mb-4">
@@ -37,11 +37,11 @@ const UserTable = () => {
       </h2>
 
       {/* TABLE */}
-      <div className="overflow-x-auto">
+      <div className="flex-1 overflow-auto">
         <table className="w-full text-sm text-left text-gray-300">
 
           {/* HEADER */}
-          <thead className="text-xs text-gray-400 border-b border-[#241E1E]">
+          <thead className="sticky top-0 bg-[#161212] z-10 text-xs text-gray-400 border-b border-[#241E1E]">
             <tr>
               <th className="pb-3">Name</th>
               <th className="pb-3">Phone</th>

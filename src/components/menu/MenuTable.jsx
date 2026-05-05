@@ -112,7 +112,7 @@ const MenuTable = () => {
     //   </table>
 
     // </div>
-    <div className='bg-[#161212] border border-[#241E1E] rounded-xl p-4'>
+    <div className='h-full flex flex-col bg-[#161212] border border-[#241E1E] rounded-xl p-4 overflow-hidden'>
       {/* HEADER */}
       <div className='flex justify-between mb-4'>
         <h2 className='text-white text-sm'>Menu Items</h2>
@@ -126,10 +126,10 @@ const MenuTable = () => {
       </div>
 
       {/* SCROLL FIX */}
-      <div className='w-full overflow-x-auto'>
+      <div className='w-full overflow-auto'>
         {/* <div className="min-w-max"> */}
         <table className='min-w-[1600px] text-sm text-gray-300'>
-          <thead className='text-gray-400 border-b border-[#241E1E]'>
+          <thead className='sticky top-0 bg-[#161212] z-10 text-gray-400 border-b border-[#241E1E]'>
             <tr>
               <th className='px-2 text-left py-2'>Code</th>
               <th className='px-2 text-left py-2'>Name</th>
