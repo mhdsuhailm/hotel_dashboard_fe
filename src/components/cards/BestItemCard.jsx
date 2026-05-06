@@ -36,7 +36,14 @@ const BestItemCard = ({ items }) => {
     return () => clearInterval(interval);
   }, [items.length]);
 
-  const item = items[index];
+  const item = items[index] || {};
+  if (!items || items.length === 0) {
+  return (
+    <div className="bg-[#161212] border border-[#241E1E] rounded-xl p-3 h-full text-white flex items-center justify-center">
+      No Best Sellers
+    </div>
+  );
+}
 
   return (
     <div className="bg-[#161212] border border-[#241E1E] rounded-xl p-3 h-full">
@@ -78,7 +85,7 @@ const BestItemCard = ({ items }) => {
           <div className="flex justify-between w-full px-4 mt-1 text-xs text-gray-400 z-10 gap-4">
             <span>Orders {item.orders}</span>
             <span className="text-orange-400 font-semibold">
-              ${item.price}
+              ₹{item.price}
             </span>
           </div>
         </div>

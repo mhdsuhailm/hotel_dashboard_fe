@@ -95,26 +95,27 @@ import axios from 'axios'
 const AdminDashboard = () => {
   const [stats, setStats] = useState(null)
   const [range, setRange] = useState('1Y')
-  const bestItems = [
-    {
-      name: "Chicken Burger",
-      orders: 64,
-      price: 10.99,
-      image: "https://i.imgur.com/5Aqgz7o.png"
-    },
-    {
-      name: "Pizza",
-      orders: 48,
-      price: 12.99,
-      image: "https://i.imgur.com/8Km9tLL.png"
-    },
-    {
-      name: "Fried Chicken",
-      orders: 80,
-      price: 15.99,
-      image: "https://i.imgur.com/YOUR_IMG.png"
-    }
-  ];
+  const [bestItems, setBestItems] = useState([]);
+  // const bestItems = [
+  //   {
+  //     name: "Chicken Burger",
+  //     orders: 64,
+  //     price: 10.99,
+  //     image: "https://i.imgur.com/5Aqgz7o.png"
+  //   },
+  //   {
+  //     name: "Pizza",
+  //     orders: 48,
+  //     price: 12.99,
+  //     image: "https://i.imgur.com/8Km9tLL.png"
+  //   },
+  //   {
+  //     name: "Fried Chicken",
+  //     orders: 80,
+  //     price: 15.99,
+  //     image: "https://i.imgur.com/YOUR_IMG.png"
+  //   }
+  // ];
   const trendingItems = [
   {
     name: "Skewered Foods",
@@ -141,6 +142,29 @@ const AdminDashboard = () => {
     image: "https://i.imgur.com/YOUR_IMG.png"
   }
 ];
+useEffect(() => {
+  const fetchBestItems = async () => {
+    try {
+      const res = await axios.get(
+        `${import.meta.env.VITE_API_URL}/api/stats/bestsellers`
+        // `http://localhost:5000/api/stats/bestsellers`
+      );
+
+      const formatted = res.data.map(item => ({
+        name: item.name,
+        orders: Math.floor(Math.random() * 100), // TEMP (if no orders column)
+        price: item.price, // TEMP (replace if you have price)
+        image: item.image?.[0] || "/fallback.png"
+      }));
+
+      setBestItems(formatted);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  fetchBestItems();
+}, []);
   useEffect(() => {
     const fetchStats = async () => {
       // const res = await axios.get("http://localhost:5000/api/dashboard/stats");

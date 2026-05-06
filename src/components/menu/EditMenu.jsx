@@ -306,7 +306,7 @@ const EditMenu = () => {
 
             <h2 className="text-lg mb-6">Edit Menu Item</h2>
 
-            <div className="grid grid-cols-2 gap-4">
+            {/* <div className="grid grid-cols-2 gap-4">
 
               <input name="name" placeholder="Name" value={form.name} onChange={handleChange} className="p-2 bg-[#1E1919] rounded" />
 
@@ -338,10 +338,10 @@ const EditMenu = () => {
 
               <textarea name="description" placeholder="Description" value={form.description} onChange={handleChange} className="p-2 bg-[#1E1919] rounded col-span-2" />
 
-              <textarea name="nutritional_info" placeholder="Nutritional Info" value={form.nutritional_info} onChange={handleChange} className="p-2 bg-[#1E1919] rounded col-span-2" />
+              <textarea name="nutritional_info" placeholder="Nutritional Info" value={form.nutritional_info} onChange={handleChange} className="p-2 bg-[#1E1919] rounded col-span-2" /> */}
 
               {/* Toggles */}
-              <div className="flex gap-6 col-span-2 mt-2 flex-wrap">
+              {/* <div className="flex gap-6 col-span-2 mt-2 flex-wrap">
                 <label><input type="checkbox" name="is_available" checked={form.is_available} onChange={handleChange} /> Available</label>
                 <label><input type="checkbox" name="is_bestseller" checked={form.is_bestseller} onChange={handleChange} /> Bestseller</label>
                 <label><input type="checkbox" name="is_recommended" checked={form.is_recommended} onChange={handleChange} /> Recommended</label>
@@ -349,7 +349,129 @@ const EditMenu = () => {
                 <label><input type="checkbox" name="is_new" checked={form.is_new} onChange={handleChange} /> New</label>
               </div>
 
-            </div>
+            </div> */}
+            <div className="grid grid-cols-2 gap-4">
+
+  {/* Name */}
+  <div className="flex flex-col">
+    <label className="text-sm mb-1 text-gray-400">Item Name</label>
+    <input name="name" value={form.name} onChange={handleChange} className="p-2 bg-[#1E1919] rounded" />
+  </div>
+
+  {/* Category */}
+  <div className="flex flex-col">
+    <label className="text-sm mb-1 text-gray-400">Category</label>
+    <select name="category_id" value={form.category_id} onChange={handleChange} className="p-2 bg-[#1E1919] rounded">
+      <option value="">Select Category</option>
+      {categories.map(c => (
+        <option key={c.id} value={c.id}>{c.name}</option>
+      ))}
+    </select>
+  </div>
+
+  {/* Food Type */}
+  <div className="flex flex-col">
+    <label className="text-sm mb-1 text-gray-400">Food Type</label>
+    <select name="food_type" value={form.food_type} onChange={handleChange} className="p-2 bg-[#1E1919] rounded">
+      <option value="veg">Veg</option>
+      <option value="non_veg">Non Veg</option>
+    </select>
+  </div>
+
+  {/* Price */}
+  <div className="flex flex-col">
+    <label className="text-sm mb-1 text-gray-400">Price (₹)</label>
+    <input name="price" value={form.price} onChange={handleChange} className="p-2 bg-[#1E1919] rounded" />
+  </div>
+
+  {/* Preparation Time */}
+  <div className="flex flex-col">
+    <label className="text-sm mb-1 text-gray-400">Preparation Time (mins)</label>
+    <input name="preparation_time" value={form.preparation_time} onChange={handleChange} className="p-2 bg-[#1E1919] rounded" />
+  </div>
+
+  {/* Image URL */}
+  <div className="flex flex-col">
+    <label className="text-sm mb-1 text-gray-400">Image URL</label>
+    <input name="image_url" value={form.image_url} onChange={handleChange} className="p-2 bg-[#1E1919] rounded" />
+  </div>
+
+  {/* Chef Note */}
+  <div className="flex flex-col">
+    <label className="text-sm mb-1 text-gray-400">Chef’s Note</label>
+    <input name="chef_note" value={form.chef_note} onChange={handleChange} className="p-2 bg-[#1E1919] rounded" />
+  </div>
+
+  {/* Calories */}
+  <div className="flex flex-col">
+    <label className="text-sm mb-1 text-gray-400">Calories (kcal)</label>
+    <input name="calories" value={form.calories} onChange={handleChange} className="p-2 bg-[#1E1919] rounded" />
+  </div>
+
+  {/* Ingredients */}
+  <div className="flex flex-col col-span-2">
+    <label className="text-sm mb-1 text-gray-400">Ingredients</label>
+    <input name="ingredients" value={form.ingredients} onChange={handleChange} className="p-2 bg-[#1E1919] rounded" />
+  </div>
+
+  {/* Tags */}
+  <div className="flex flex-col">
+    <label className="text-sm mb-1 text-gray-400">Tags</label>
+    <input name="tags" value={form.tags} onChange={handleChange} className="p-2 bg-[#1E1919] rounded" />
+  </div>
+
+  {/* Allergens */}
+  <div className="flex flex-col">
+    <label className="text-sm mb-1 text-gray-400">Allergens</label>
+    <input name="allergens" value={form.allergens} onChange={handleChange} className="p-2 bg-[#1E1919] rounded" />
+  </div>
+
+  {/* Description */}
+  <div className="flex flex-col col-span-2">
+    <label className="text-sm mb-1 text-gray-400">Description</label>
+    <textarea name="description" value={form.description} onChange={handleChange} className="p-2 bg-[#1E1919] rounded" />
+  </div>
+
+  {/* Nutritional Info */}
+  <div className="flex flex-col col-span-2">
+    <label className="text-sm mb-1 text-gray-400">Nutritional Information</label>
+    <textarea name="nutritional_info" value={form.nutritional_info} onChange={handleChange} className="p-2 bg-[#1E1919] rounded" />
+  </div>
+
+  {/* Toggles */}
+  <div className="col-span-2 mt-3">
+    <label className="text-sm mb-2 text-gray-400">Item Flags</label>
+    <div className="flex gap-6 flex-wrap">
+
+      <label className="flex items-center gap-2">
+        <input type="checkbox" name="is_available" checked={form.is_available} onChange={handleChange} />
+        Available
+      </label>
+
+      <label className="flex items-center gap-2">
+        <input type="checkbox" name="is_bestseller" checked={form.is_bestseller} onChange={handleChange} />
+        Bestseller
+      </label>
+
+      <label className="flex items-center gap-2">
+        <input type="checkbox" name="is_recommended" checked={form.is_recommended} onChange={handleChange} />
+        Recommended
+      </label>
+
+      <label className="flex items-center gap-2">
+        <input type="checkbox" name="is_popular" checked={form.is_popular} onChange={handleChange} />
+        Popular
+      </label>
+
+      <label className="flex items-center gap-2">
+        <input type="checkbox" name="is_new" checked={form.is_new} onChange={handleChange} />
+        New Item
+      </label>
+
+    </div>
+  </div>
+
+</div>
 
             <button
               onClick={handleSubmit}
